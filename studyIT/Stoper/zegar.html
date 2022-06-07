@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Zegar</title>
+    <style>
+        body {
+            font-family: Monaco, monospace;
+            text-align: center;
+            color: rgb(224, 224, 219);
+            background-color: black;
+        }
+
+        body h1 {
+            color: yellow;
+        }
+
+        #czas {
+            font-size: 75px;
+        }
+    </style>
+    <script>
+        function odliczanie() {
+            var teraz = new Date();
+            var godzina = teraz.getHours();
+            if (godzina < 10) godzina = "0" + godzina;
+            var minuty = teraz.getMinutes();
+            if (minuty < 10) minuty = "0" + minuty;
+            var sekundy = teraz.getSeconds();
+            if (sekundy < 10) sekundy = "0" + sekundy;
+            var napis = godzina + ":" + minuty + "." + sekundy;
+            document.getElementById("czas").innerHTML = napis;
+            var rok = teraz.getFullYear();
+            var miesiac = teraz.getMonth() + 1;
+            if (miesiac < 10) miesiac = "0" + miesiac;
+            var dzien = teraz.getDate();
+            if (dzien < 10) dzien = "0" + dzien;
+            var napis2 = dzien + "/" + miesiac + "/" + rok;
+            document.getElementById("data").innerHTML = napis2;
+
+        }
+        setInterval(odliczanie, 1000);
+    </script>
+</head>
+
+<body>
+    <h1 id="czas"></h1>
+    <h2 id="data"></h2>
+</body>
+
+</html>

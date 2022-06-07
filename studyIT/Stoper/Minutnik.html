@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title> Minutnik </title>
+    <style>
+        body {
+            text-align: center;
+            color: fuchsia
+        }
+
+        button {
+            margin-top: 10px;
+            color: green
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var sekundy = 0;
+            var minuty = 0;
+            var zmiana = 0;
+
+            $("#start").click(function () {
+                if (zmiana == 1) {
+                    zmiana = 0;
+                    document.getElementById("start").innerHTML = "start";
+                }
+                else {
+                    zmiana = 1;
+                    document.getElementById("start").innerHTML = "stop";
+                }
+            });
+
+            $("#minuty1").click(function () {
+                sekundy = 0;
+                minuty = 1;
+                dajNapis();
+            });
+            $("#minuty5").click(function () {
+                sekundy = 0;
+                minuty = 5;
+                dajNapis();
+            });
+            $("#minuty10").click(function () {
+                sekundy = 0;
+                minuty = 10;
+                dajNapis();
+            });
+            $("#minus10").click(function () {
+                sekundy = sekundy - 10;
+                if (sekundy < 0) {
+                    if (minuty > 0) {
+                        minuty = minuty - 1;
+                        sekundy = sekundy + 60;
+                    }
+                    else {
+                        sekundy = 0;
+                        minuty = 0;
+                    }
+                }
+                dajNapis();
+            });
+            $("#plus10").click(function () {
+                sekundy = sekundy + 10;
+                if (sekundy >= 60) {
+                    minuty = minuty + 1;
+                    sekundy = sekundy - 60;
+                }
+                dajNapis();
+            });
+            function petla() {
+                sekundy = sekundy - zmiana;
+                if (sekundy < 0) {
+                    minuty = minuty - 1;
+                    sekundy = sekundy + 60;
+
+                    if (minuty < 0) {
+                        sekundy = 0;
+                        minuty = 0;
+
+                    }
+
+                }
+
+                dajNapis();
+            }
+            function dajNapis() {
+                var n_minuty = minuty;
+                var n_sekundy = sekundy;
+                if (minuty < 10) n_minuty = "0" + minuty;
+                if (sekundy < 10) n_sekundy = "0" + sekundy;
+                var napis = n_minuty + ":" + n_sekundy;
+                document.getElementById("wynik").innerHTML = napis;
+
+
+            }
+
+            setInterval(petla, 1000);
+        });
+
+    </script>
+</head>
+
+<body>
+    <h1> MINUTNIK </h1>
+    <h1 id="wynik">00:00 </h1>
+    <div id="przyciski">
+        <button id="minuty1"> 1 minuta </button>
+        <button id="minuty5"> 5 minut </button>
+        <button id="minuty10"> 10 minut </button>
+        <button id="minus10"> - (10 s.) </button>
+        <button id="plus10"> + (10 s.) </button>
+        <button id="start"> Start </button>
+    </div>
+</body>
+
+</html>

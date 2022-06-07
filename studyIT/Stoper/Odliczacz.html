@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title> Odliczacz </title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function odlicz(rok, miesiac, dzien, godzina, minuta) {
+                var aktualnyCzas = new Date();
+                var dataPodana = new Date(rok, miesiac - 1, dzien, godzina, minuta, 0, 0);
+                var pozostalyCzas = dataPodana.getTime() - aktualnyCzas.getTime();
+                if (pozostalyCzas > 0) {
+                    var sekundy = pozostalyCzas / 1000;
+                    var minuty = sekundy / 60;
+                    var godziny = minuty / 60;
+                    var dni = godziny / 24;
+                    var lata = dni / 365;
+                    var pozostaleSekundy = Math.floor(sekundy % 60);
+                    var pozostaleMinuty = Math.floor(minuty % 60);
+                    var pozostaleGodziny = Math.floor(godziny % 24);
+                    var pozostaleDni = Math.floor(dni % 365);
+                    var pozostaleLata = Math.floor(lata);
+                    return "Do podanej daty pozostalo: " + pozostaleLata + " lat, " + pozostaleDni + " dni, " + pozostaleGodziny + "  godzin, " + pozostaleMinuty + " minut, " + pozostaleSekundy + " sekund. ";
+                }
+                else {
+                    return "Podana data juz minela."
+                }
+            }
+            $("#odlicz").click(function () {
+                var r = document.getElementById("rok").value;
+                var m = document.getElementById("miesiac").value;
+                var d = document.getElementById("dzien").value;
+                var g = document.getElementById("godzina").value;
+                var min = document.getElementById("minuta").value;
+                document.getElementById("wynik").innerHTML = odlicz(r, m, d, g, min);
+            });
+        });
+
+
+
+    </script>
+</head>
+
+<body>
+    <h1> ODLICZACZ CZASU </h1>
+    <h1 id="wynik"> </h1>
+    <p>Rok</p> <input id="rok"> </input>
+    <p>Miesonc</p> <input id="miesiac"> </input>
+    <p>Dzien</p> <input id="dzien"> </input>
+    <p>Godzina</p> <input id="godzina"> </input>
+    <p>Minuta</p> <input id="minuta"> </input>
+    <br><button id="odlicz"> ODLICZ </button>
+</body>
+
+</html>

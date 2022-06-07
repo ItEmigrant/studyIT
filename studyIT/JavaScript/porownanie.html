@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    ody {
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    #formularzZamowienia {
+        background-color: #eeeeee;
+        border: 4px solid yellow;
+        border-radius: 4px;
+        padding: 8px;
+        margin: 8px;
+        box-shadow: 10px 10px 5px #888888;
+    }
+</style>
+
+
+<body>
+    <h1>Javascriptowa pizzeria</h1>
+
+    <div id="formularzZamowienia">
+        <label>Ile pizz chcesz zamówić?
+            <input type="number" id="liczbaPizz" />
+        </label>
+        <br />
+        <br />
+        <label>Jaki rodzaj pizzy?
+            <select id="rodzajPizzy">
+                <option value="serowa">Serowa</option>
+                <option value="pepperoni">Pepperoni</option>
+                <option value="supreme">Supreme</option>
+            </select>
+        </label>
+        <br />
+        <br />
+        <label>Gdzie mieszkasz?
+            <select id="miastoDostawy">
+                <option value="Gdziekolwiek">Gdziekolwiek</option>
+                <option value="Lvov">Lvov</option>
+                <option value="Krakow">Krakov</option>
+            </select>
+        </label>
+        <br />
+        <br />
+        <label> Czy masz urpdziny?
+            <select id="urodziny">
+                <option value="tak">Tak</option>
+                <option value="nie">Nie</option>
+            </select>
+        </label>
+        <br />
+        <br />
+        <button type="button" id="zamow">Zamów</button>
+    </div>
+    <div id="wyswietlCene"></div>
+    <script>
+        // nasłuchuj kliknięć przycisku
+        document.getElementById("zamow").addEventListener("click", zamow);
+
+        /**
+         * pobiera wartości z formularza
+         * oblicza cenę
+         * tworzy wynik
+         */
+        function zamow() {
+            // pobierz wartości z formularza
+            var liczbaPizz = document.getElementById("liczbaPizz").value;
+            var rodzajPizzy = document.getElementById("rodzajPizzy").value;
+            var miastoDostawy = document.getElementById("miastoDostawy").value;
+            var urodziny = document.getElementById("urodziny").value;
+
+            // oblicz cenę pizzy
+            var cenaPizzy = obliczCenePizzy(liczbaPizz, rodzajPizzy);
+
+            // oblicz cenę dostawy
+            var cenaDostawy = obliczCeneDostawy(cenaPizzy, miastoDostawy, urodziny);
+
+            // stwórz wynik
+            var wynik = "<p>Dziękujemy za zamówienie.</p>";
+
+
+            if (cenaDostawy === 0) {
+                wynik += "<p>Masz darmowa dostawe!!!</p>";
+            }
+            else {
+                wynik += "Cena dostawy: " + cenaDostawy + " zl";
+            }
+
+            wynik += "<p>Cena zamówienia: " + (cenaPizzy + cenaDostawy) + " zł";
+
+            // wyświetl wynik
+            document.getElementById("wyswietlCene").innerHTML = wynik;
+        }
+
+
+
+        function obliczCenePizzy(liczbaPizz, rodzajPizzy) {
+            var cenaZamowienia = Number(liczbaPizz) * 20;
+            var dodatkowaOplata = 0;
+
+            if (rodzajPizzy === "supreme") {
+                dodatkowaOplata = Number(liczbaPizz) * 4;
+
+            }
+
+            cenaZamowienia += dodatkowaOplata;
+            return cenaZamowienia;
+        }
+
+        /**
+         * oblicza cenę dostawy
+         */
+        function obliczCeneDostawy(cenaPizzy, miastoDostawy, urodziny) {
+            var cenaDostawy = 0;
+
+            if (((miastoDostawy === "Gdziekolwiek") && (cenaPizzy > 20)) || (urodziny === "tak")) {
+                cenaDostawy = 0;
+            }
+            else {
+                cenaDostawy = 10;
+            }
+
+            return cenaDostawy;
+        }
+    </script>
+</body>
+
+</html>

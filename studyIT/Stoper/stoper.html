@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>STOPER</title>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var dziesietne = 0;
+            var sekundy = 0;
+            var minuty = 0;
+            var godziny = 0;
+            var zmiana = 0;
+
+            $("#miedzyczas").click(function () {
+                var zapis = godziny + ":" + minuty + ":" + sekundy + "." + dziesietne;
+                document.getElementById("miedzy").innerHTML += zapis + "<br>";
+            });
+
+            $("#reset").click(function () {
+                godziny = 0;
+                minuty = 0;
+                sekundy = 0;
+                dziesietne = 0;
+            });
+
+            $("#start").click(function () {
+                if (zmiana == 0) {
+                    zmiana = 1;
+                    document.getElementById("start").innerHTML = "Pauza";
+                }
+                else {
+                    zmiana = 0;
+                    document.getElementById("start").innerHTML = "Start";
+                }
+            });
+
+            function petla() {
+                dziesietne = dziesietne + zmiana;
+                if (dziesietne == 10) {
+                    sekundy = sekundy + 1;
+                    dziesietne = 0;
+                }
+                if (sekundy == 60) {
+                    minuty = minuty + 1;
+                    sekundy = 0;
+                }
+                if (minuty == 60) {
+                    godziny = godziny + 1;
+                    minuty = 0;
+                }
+                var napis = godziny + ":" + minuty + ":" + sekundy + "." + dziesietne;
+                document.getElementById("wynik").innerHTML = napis;
+
+            }
+            setInterval(petla, 100);
+
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Stoper</h1>
+    <h1 id="wynik"> 0:00:00.0</h1>
+    <h2 id="miedzy"></h2>
+    <div id="przyciski">
+        <button id="reset"> Reset </button>
+        <button id="miedzyczas"> Międzyczas </button>
+        <button id="start"> Start </button>
+    </div>
+</body>

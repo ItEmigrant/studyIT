@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<title>QUIZ</title>
+<style>
+    body {
+        text-align: center;
+        background-color: rgb(229, 186, 236)
+    }
+
+    #logo {
+        width: 450px;
+        height: 320px;
+    }
+
+    #przyciski {
+        background-color: rgb(219, 219, 231);
+    }
+
+    button {
+        min-width: 200px;
+        min-height: 50px;
+        background-color: rgb(44, 33, 33);
+        color: snow;
+        margin: 20px;
+    }
+
+    #pytanie {
+        background-color: gold;
+    }
+</style>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function pytanie(tresc, a, b, c, d, p) {
+                this.pyt = tresc;
+                this.odp_a = a;
+                this.odp_b = b;
+                this.odp_c = c;
+                this.odp_d = d;
+                this.poprawna = p;
+            }
+            pytania = [];
+            pytania[0] = new pytanie("Pro jake auto marze?", "Audi TTS", "Porche 911", "Mercedes C 43 AMG", "KIA Stinger", "Audi TTS");
+            pytania[1] = new pytanie("Jaki mam wzrost?", "188 cm", "185 cm", "187 cm", "189 cm", "187 cm");
+            pytania[2] = new pytanie("Moj uliublony film?", "Znakomties Joe Black", "Ganibal", "Gladiator", "Forsaz", "Znakomties Joe Black");
+            pytania[3] = new pytanie("Co lubie czytac?", "psychologia", "it", "rozwoj osobisty", "bzdury", "rozwoj osobisty");
+            pytania[4] = new pytanie("O czym marze?", "byc bogatym", "byc zdrowym", "warian A i B", "byc profesjonalista", "byc profesjonalista");
+            pytania[5] = new pytanie("Ile mam tatoo?", "8", "10", "9", "7", "9");
+            pytania[6] = new pytanie("Kto moj najlepszy kolega?", "Ludka", "Oleg", "Vitalik", "wariant A, B, C", "Ludka");
+            pytania[7] = new pytanie("Jak lubie odpoczywac?", "Spac", "Keks", "szoping", "kawka", "kawka");
+            pytania[8] = new pytanie("Kto moj ulublony akto?", "A. Swarcenegr", "E. Hopkins", "K. Reeves", "B. Pitt", "K. Reeves");
+            var numer = 0;
+            function losuj() {
+                numer = Math.random();
+                numer = numer * pytania.length;
+                numer = Math.floor(numer);
+                if (numer > pytania.length - 1) numer = pytania.length - 1;
+                document.getElementById("pytanie").innerHTML = pytania[numer].pyt;
+                document.getElementById("odpA").innerHTML = pytania[numer].odp_a;
+                document.getElementById("odpB").innerHTML = pytania[numer].odp_b;
+                document.getElementById("odpC").innerHTML = pytania[numer].odp_c;
+                document.getElementById("odpD").innerHTML = pytania[numer].odp_d;
+            }
+            losuj();
+            $("#odpA").click(function () {
+                if (pytania[numer].odp_a == pytania[numer].poprawna) {
+                    document.getElementById("info").innerHTML = "BRAWO!!!"
+                    losuj();
+                }
+                else {
+                    document.getElementById("info").innerHTML = "Przykro, ale NIE";
+
+                }
+            });
+            $("#odpB").click(function () {
+                if (pytania[numer].odp_b == pytania[numer].poprawna) {
+                    document.getElementById("info").innerHTML = "OOO TAK!!!"
+                    losuj();
+                }
+                else {
+                    document.getElementById("info").innerHTML = "Niestety, zla odpowidz";
+
+                }
+            });
+            $("#odpC").click(function () {
+                if (pytania[numer].odp_c == pytania[numer].poprawna) {
+                    document.getElementById("info").innerHTML = "BRAWisimo!!!"
+                    losuj();
+                }
+                else {
+                    document.getElementById("info").innerHTML = "UPSS";
+
+                }
+            });
+            $("#odpD").click(function () {
+                if (pytania[numer].odp_d == pytania[numer].poprawna) {
+                    document.getElementById("info").innerHTML = "YES!!!"
+                    losuj();
+                }
+                else {
+                    document.getElementById("info").innerHTML = "UPSS, zla odpowidz";
+
+                }
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <img id="logo" src="art4.png"> </img>
+    <h1 id="pytanie"> tresc pytanie </h1>
+    <div id="przyciski">
+        <button id="odpA">A)</button>
+        <button id="odpB">B)</button>
+        <button id="odpC">C)</button>
+        <button id="odpD">D)</button>
+    </div>
+    <h2 id="info"></h2>
+</body>
+
+</html>
