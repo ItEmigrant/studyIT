@@ -82,6 +82,27 @@
              * jeśli nie: wyświetl wiadomość o braku funduszy
              * wyświetl całkowitą liczbę lunchów po wyjściu z pętli
             */
+            zresetujFormularz();
+            var day = 0;
+            while (pieniadze > 0) {
+                day++;
+                var cenaNaDzis = pobierzCeneKanapki();
+                var liczbaKanapek = document.getElementById("liczbaKanapek").value;
+                var suma = cenaNaDzis * liczbaKanapek;
+                if (pieniadze >= suma) {
+                    pieniadze = pieniadze - suma;
+                    lunche++;
+
+                    document.getElementById("rachunek").innerHTML += "<p> Day " + day + "., kanapki kosztuja: "
+                        + cenaNaDzis + " zl. Ty masz jeszcze " + pieniadze.toFixed(2) + "zl. </p>";
+                }
+                else {
+                    document.getElementById("rachunek").innerHTML += "<p> Dzisiaj kanapki kosztuja: " + cenaNaDzis
+                        + ". No dollars Bro in the cash account. Moze go to work men? </p>";
+                    pieniadze = 0;
+                }
+            }
+            document.getElementById("rachunek").innerHTML += "<p> Kupiles lunchow: " + lunche + ". </p>";
         }
 
         /*
