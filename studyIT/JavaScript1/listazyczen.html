@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Java Script</title>
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            font-family: Georgia, Times, 'Times New Roman', serif;
+        }
+
+        h1 {
+            color: indigo;
+        }
+
+        #dodajZyczenie {
+            background-color: rgb(187, 254, 3);
+            border-radius: 5px;
+            border: 2px solid rgb(2, 0, 0);
+        }
+
+        #dodajZyczenie:active {
+            background-color: rgb(124, 139, 240);
+            border: 2px solid rgb(128, 138, 43);
+        }
+
+        #zyczenie:hover {
+            background-color: rgb(243, 223, 197);
+
+        }
+
+        #drukujListe {
+            background-color: rgb(228, 165, 165);
+            font-size: medium;
+            border-radius: 3px;
+            color: blue;
+        }
+
+        #drukujListe:active {
+            background-color: yellow;
+            border: 3px solid;
+        }
+
+        #stronaZLista.wydruk {
+            background-color: #FAF2AD;
+            padding: 20px;
+            font-family: cursive;
+        }
+
+        #stronaZLista.wydruk ul {
+            margin: 10px 0px;
+            padding: 0px;
+            border-left: 4px double red;
+        }
+
+        #stronaZLista.wydruk li {
+            list-style-type: none;
+            margin: 0px -20px;
+            padding-left: 26px;
+            border-bottom: 1px solid blue;
+            line-height: 36px;
+            font-size: 24px;
+            font-family: cursive;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <div id="stronaZLista">
+
+        <h1>**My list dreams**</h1>
+
+        <div id="obszarFormularza">
+            <h3><label>Moje życzenie:
+                    <input type="text" id="zyczenie" />
+                </label>
+                <button type="button" id="dodajZyczenie">Dodaj!</button>
+            </h3>
+
+            <br />
+            <button type="button" id="drukujListe">Wydrukuj swoją listę</button>
+        </div>
+        <ul id="listaZyczen"></ul>
+    </div>
+
+    <script>
+
+        var przyciskDruku = document.getElementById("drukujListe");
+        przyciskDruku.addEventListener("click", widokDruku);
+
+
+        var przyciskDodawania = document.getElementById("dodajZyczenie");
+        przyciskDodawania.addEventListener("click", dodajElement);
+
+        var mojaLista = [];
+        var obszarMojejListy = document.getElementById("listaZyczen");
+
+
+
+        function dodajElement() {
+            var zyczenie = document.getElementById("zyczenie");
+            dodajDoListy(zyczenie);
+            wyczyscPoleTekstowe(zyczenie);
+        }
+
+        function dodajDoListy(rzeczDoDodania) {
+            mojaLista.push(rzeczDoDodania.value);
+            var nowyElement = document.createElement("li");
+            nowyElement.innerHTML = mojaLista[mojaLista.length - 1];
+
+            obszarMojejListy.appendChild(nowyElement);
+
+        }
+
+        function wyczyscPoleTekstowe(poleDoWyczyszczenia) {
+            poleDoWyczyszczenia.value = "";
+        }
+
+        function widokDruku() {
+            var stronaZLista = document.getElementById("stronaZLista");
+            var obszarFormularza = document.getElementById("obszarFormularza");
+
+            obszarFormularza.style.display = "none";
+            stronaZLista.className = "wydruk";
+            obszarMojejListy.innerHTML = "";
+            mojaLista.sort();
+
+            for (var i = 0; i < mojaLista.length; i++) {
+                obszarMojejListy.innerHTML += "<li>" + mojaLista[i] + "</li>";
+            }
+            //*window.print*//
+        }
+
+
+    </script>
+</body>
+
+</html>

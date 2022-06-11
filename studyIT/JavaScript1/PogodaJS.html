@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Petla</title>
+</head>
+<style>
+    #Poniedzialek,
+    #Wtorek,
+    #Srode,
+    #Czwartek,
+    #Piatek {
+        width: 18%;
+        height: 200px;
+        float: left;
+        border: 2px solid black;
+        padding: 2px;
+        font-family: monospace;
+        font-size: 15px;
+
+    }
+
+    .snieg {
+        background-color: cornsilk;
+        
+    }
+
+    .super {
+        background-color: yellow;
+    }
+
+    .mocno {
+        background-color: red;
+    }
+
+    .wiatr {
+        background-color: darkmagenta;
+    }
+
+    .burza {
+        background-color: black;
+        color: aliceblue;
+    }
+
+    .deszcz {
+        background-color: dimgrey;
+    }
+
+    .mega {
+        background-color: darkgoldenrod;
+    }
+
+    .spacer {
+        background-color: darkgreen;
+    }
+
+    .spac {
+        background-color: aqua;
+    }
+</style>
+
+<body>
+    <div id="Prognoza5Dni"></div>
+    <script>
+        var dni = ["Poniedzialek", "Wtorek", "Srode", "Czwartek", "Piatek"];
+        var pogoda = ["snieg", "super jasno", "mocno goronco", "wiatr", "burza", "deszcz", "mega zimno", "pogoda na spacer", "pogoda zeby spac"];
+        var minimalnaTemperatura = 0;
+        var maksymalnaTemperatura = 40;
+
+        generujePrognoze();
+
+
+        function generujePrognoze() {
+            for (var i = 0; i < dni.length; i++) {
+                var pogodaNaDzis = pogoda[Math.floor(Math.random() * pogoda.length)];
+                var temperaturaNaDzis = Math.floor(Math.random() * (maksymalnaTemperatura - minimalnaTemperatura) + minimalnaTemperatura);
+                document.getElementById("Prognoza5Dni").innerHTML += "<div id='" + dni[i] + "' class='" + pogodaNaDzis + "'><b>Pogoda na " + dni[i]
+                    + ":</br><br><br>" + pogodaNaDzis + " i " + temperaturaNaDzis + "&#788;C.</div>";
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>

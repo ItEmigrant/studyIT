@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Java Script</title>
+  <meta charset="UTF-8">
+
+</head>
+
+
+<body>
+
+  <h1>Rzeczy, które lubię</h1>
+  <h3>Oto niektóre z rzeczy, które lubię robić:</h3>
+  <ul>
+    <li id="pierwszaRzecz">pisanie</li>
+    <li id="drugaRzecz">tańczenie</li>
+    <li id="trzeciaRzecz">podróżowanie</li>
+  </ul>
+  <button id="zmienListe" type="button">
+    Zmień swoją listę
+  </button>
+
+  <script>
+    var element1;
+    var element2;
+    var element3;
+
+    document.getElementById("zmienListe").onclick = nowaLista;
+
+    function nowaLista() {
+      element1 = prompt("Podaj nową pierwszą rzecz: ");
+      element2 = prompt("Podaj nową drugą rzecz: ");
+      element3 = prompt("Podaj nową trzecią rzecz: ");
+      zaktualizujListe();
+    }
+
+    function zaktualizujListe() {
+      document.getElementById("pierwszaRzecz").innerHTML = element1;
+      document.getElementById("drugaRzecz").innerHTML = element2;
+      document.getElementById("trzeciaRzecz").innerHTML = element3;
+    }
+
+  </script>
+</body>
+
+</html>

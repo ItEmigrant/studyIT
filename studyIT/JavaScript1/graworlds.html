@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Qwest</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        body {
+            font-family: "Comic Sans MS";
+            background-color: aqua;
+
+        }
+
+        #enterWorld {
+            float: left;
+            width: 45%;
+            background-color: darkgray;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0px;
+            margin: 0px;
+
+        }
+
+        li {
+            line-height: 2em;
+            text-transform: uppercase;
+            margin-top: 8px;
+        }
+
+        input {
+            border-width: 0 0 1px 0;
+            border-color: #333;
+        }
+
+        #przyciskDiv {
+            text-align: center;
+        }
+
+        #przyciskZamiany {
+            margin-top: 30px;
+            width: 180px;
+            height: 25px;
+        }
+
+        #story {
+            border: 1px dashed blue;
+            float: left;
+            width: 45%;
+            margin-top: 12px;
+            padding: 8px;
+            background-color: lightblue;
+        }
+
+        .zamiana {
+            color: crimson;
+            text-decoration: underline;
+            text-transform: uppercase;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <div id="enterWorld">
+        <ul>
+            <li> <input type="text" id="przymiotnik" /><br />
+                Jakiego dnia?</li>
+            <li> <input type="text" id="czasownik" /><br />
+                Co zrobil?</li>
+            <li> <input type="text" id="mianownik" /><br />
+                Kto byl?</li>
+            <li> <input type="text" id="licznik" /><br />
+                Ile czasu?</li>
+        </ul>
+        <div id="przyciskDiv"><button id="przyciskZamiany">REPLACE</button></div>
+    </div>
+
+    <div id="story"></div>
+    <script>
+        var przyciskZamiany = document.getElementById("przyciskZamiany");
+        przyciskZamiany.addEventListener("click", zamienTo);
+
+        function zamienTo() {
+            var storyDiv = document.getElementById("story");
+            var przymiotnik = "<span class='zamiana'>" + document.
+                getElementById("przymiotnik").value + "</span>";
+            var czasownik = "<span class='zamiana'>" + document.
+                getElementById("czasownik").value + "</span>";
+            var mianownik = "<span class='zamiana'>" + document.
+                getElementById("mianownik").value + "</span>";
+            var licznik = "<span class='zamiana'>" + document.
+                getElementById("licznik").value + "</span>";
+            var story = "<h1> Story pro Timona </h1>";
+            story += "Pewnego " + przymiotnik + " dnia";
+            story += "Timon  " + czasownik + " moja corke Alise!";
+            story += mianownik + " bylismy w domu i to widzialismy";
+            story += " Alisa cieszyla sie " + licznik + "!";
+            /* dodaj reste historii*/
+
+            storyDiv.innerHTML = story;
+        }
+
+
+    </script>
+</body>
+
+</html>
