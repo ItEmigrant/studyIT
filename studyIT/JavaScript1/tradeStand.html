@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Java Script</title>
+    <meta charset="UTF-8">
+
+</head>
+<style>
+    #poniedziałek,
+    #wtorek,
+    #środa,
+    #czwartek,
+    #piątek {
+        width: 18%;
+        height: 200px;
+        float: left;
+        border: 1px solid black;
+        padding: 2px;
+        font-family: sans-serif;
+        font-size: 12px;
+    }
+
+    .Słonecznie {
+        background-color: skyblue;
+    }
+
+    .Deszcz {
+        background-color: lightgrey;
+    }
+
+    .Zachmurzenie {
+        background-color: #eee;
+    }
+
+    .Burza {
+        background-color: #333;
+        color: #fff;
+    }
+
+    #formularzZamowienia {
+        width: 75%;
+        margin: 20px auto;
+    }
+
+    #rachunek {
+        background-color: #996600;
+        color: yellow;
+        padding: 6px;
+    }
+</style>
+
+
+<body>
+    <div id="PrognozaNa5Dni"></div>
+    <br clear="all">
+    <div id="formularzZamowienia">
+        <div id="szklanki">
+            <label>Ile szklanek lemoniady chcesz zrobić na ten tydzień?
+                <br />
+                <input type="number" id="liczbaSzklanek" placeholder="podpowiedź: idź na całość!" />
+            </label>
+        </div>
+        <div id="cena">
+            <label>Jaka będzie cena lemoniady w tym tygodniu?
+                <br />
+                <input type="number" id="cenaZaSzklanke" placeholder="więcej niż 0.5" />
+            </label>
+        </div>
+        <button type="button" id="otworzStoisko">Otwórz stoisko!</button>
+    </div>
+    <div id="rachunek"></div>
+
+    <script>
+        var dni = ["poniedziałek", "wtorek", "środa", "czwartek", "piątek"];
+        var pogoda = ["Słonecznie", "Częściowo słonecznie", "Niewielkie zachmurzenie", "Zachmurzenie", "Deszcz", "Śnieg", "Burza", "Mgła"];
+        var maksymalnaTemperatura = 40;
+        var minimalnaTemperatura = 10;
+        var kosztLemoniady = 0.5;
+        var temperatura = [];
+
+        generujPrognoze();
+
+        function generujPrognoze() {
+            var pogodaNaDzis;
+            var temperaturaNaDzis;
+            for (var i = 0; i < dni.length; i++) {
+                pogodaNaDzis = pogoda[Math.floor(Math.random() * pogoda.length)];
+                temperaturaNaDzis = Math.floor(Math.random() * (maksymalnaTemperatura -
+                    minimalnaTemperatura) + minimalnaTemperatura);
+                temperatura[i] = temperaturaNaDzis;
+                document.getElementById("PrognozaNa5Dni").innerHTML += "<div id='" + dni[i]
+                    + "' class='" + pogodaNaDzis + "'><b>Pogoda na " + dni[i] + ":</b><br><br>"
+                    + pogodaNaDzis + " i " + temperaturaNaDzis + " &#778;C.</div>";
+            }
+        }
+
+        function otworzStoisko(){
+            var liczbaSprzedanych = 0;
+            var sumaSprzedanych = 0;
+            var liczbaNiesprzedanych = 0;
+
+            zresetujFormuliar();
+            
+        }
+
+    </script>
+</body>
+
+</html>
