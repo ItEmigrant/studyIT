@@ -79,6 +79,8 @@
         var kosztLemoniady = 0.5;
         var temperatura = [];
 
+        document.getElementById("otworzStoisko").addEventListener("click", otworzStoisko);
+
         generujPrognoze();
 
         function generujPrognoze() {
@@ -95,14 +97,48 @@
             }
         }
 
-        function otworzStoisko(){
+        function otworzStoisko() {
             var liczbaSprzedanych = 0;
             var sumaSprzedanych = 0;
             var liczbaNiesprzedanych = 0;
 
             zresetujFormuliar();
-            
+            var liczbaSzklanek = Number(document.getElementById("liczbaSzklanek").value);
+            var cenaZaSzklanke = Number(document.getElementById("cenaZaSzklanke").value);
+
+            for (var i = 0; i < dni.length; i++) {
+                liczbaSprzedanych = Math.floor(temperatura[i] / cenaZaSzklanke);
+                liczbaNiesprzedanych = liczbaSzklanek - sumaSprzedanych;
+
+                if (liczbaSprzedanych > liczbaNiesprzedanych) {
+                    liczbaSprzedanych = liczbaNiesprzedanych;
+                }
+
+                sumaSprzedanych = liczbaSprzedanych + sumaSprzedanych;
+                document.getElementById("rachunek").innerHTML += "<p>" + dni[i] +
+                    " => sprzedales " + liczbaSprzedanych + " szklanek lemonjady.</p>";
+            }
+            wyswietlWyniki(liczbaSzklanek, cenaZaSzklanke, sumaSprzedanych);
         }
+
+        function zresetujFormuliar() {
+            document.getElementById("rachunek").innerHTML = "";
+        }
+
+        function wyswietlWyniki(zapasNaTydzien, cenaZaSzklanke, sprzedazNaTydzien) {
+            var przychody = sprzedazNaTydzien * cenaZaSzklanke;
+            var koszty = zapasNaTydzien * kosztLemoniady;
+            var pozostalosci = zapasNaTydzien - sprzedazNaTydzien;
+            var zysk = przychody - koszty;
+
+            document.getElementById("rachunek").innerHTML += "<p>Sprzedałeś w sumie " + sprzedazNaTydzien + " szklanek lemoniady w tym tygodniu.</p>";
+            document.getElementById("rachunek").innerHTML += "<p>Całkowity przychód: " + przychody + " zł.</p>";
+            document.getElementById("rachunek").innerHTML += "<p>Zostało Ci " + pozostalosci + " szklanek lemoniady.</p>";
+            document.getElementById("rachunek").innerHTML += "<p>Wyprodukowanie każdej szklanki kosztowało " + kosztLemoniady + " zł. Twój zysk wyniósł " + zysk + " zł.";
+        }
+
+
+
 
     </script>
 </body>
